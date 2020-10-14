@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{request.user.username}}</title>
+<style>
+  td{
+    text-align: center;
+    
+  }
+.search {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url({% static 'main/images/searchicon.png' %});
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  float:right;
+  margin: 11px;
+}
+
+
+  </style>
+</head>
+<body>
+{% include 'base/nav.html' %}
+  
+  <form style="margin-top: 55px; "action="" data-url="{% url 'account:search' %}" method="post" id="searchform">
+  {% csrf_token %}
+  <p><h4 style="float: right;">:البحث عن اسم الطالب <h4></p>
+    <input class="search"  type="text" name="search" id="search" placeholder="Search ...">
+  
+
+  <select class="custom-select" name="student-id" id="students-names">
+    {% for student in students %}
+    <option value="{{student.id}}">{{student.username}}</option>
+    {% endfor %}
+  </select>
+
+  <div class="input-group mb-3">
+    <input  name="note" style="text-align: right;margin: 11px;" type="text" class="form-control" placeholder="اكتب الملاحظة هنا" aria-label="Recipient's username" aria-describedby="button-addon2">
+  </div>
+  <button type="submit" class="btn btn-primary">ارسال الملاحظة</button>
+</form>
+<br/>
+<div>
+  <table  class="table table-bordered ">
+    <tr>
+      <td>الملاحظات المرسله </td>
+      <td> تاريخ الارسال</td>
+      <td> تمت القرائة</td>
+    </tr>
+    
+  
+  {% for note in note_sent %}
+     <tr>
+       <td>
+       <h6>{{note.note}} </h6> 
+       </td>
+       <td>
+        <h6>{{note.date}} </h6> 
+        </td>
+       <td>
+         {% if note.is_read %}
+          <h6>نعم </h6> 
+          {% else %}
+          <h6>لا </h6>
+          {% endif %}
+       </td>
+     </tr>
+       
+     
+  {% endfor %}
+</table>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+     $(document).ready(function () {
+      var csrftoken = $("input[name=csrfmiddlewaretoken]").val();
+       
+    
+       $("#search").keyup(function () {
+        var serialize = $("#searchform").serialize();
+         var inp = $('#search').val()
+         $('#students-names').empty()
+          $.ajax({
+            url : $("#searchform").data('url'),
+            data : {csrfmiddlewaretoken : csrftoken ,inp : inp }   ,
+            type : 'post' ,
+            success : function (response) {
+              console.log(response)
+              for (let res = 0; res < response.students.length; res++) {
+                $('#students-names').append(
+               ' <option value="' +response.students[res].id+'">'+response.students[res].username+'</option>'
+             ) 
+              }
+              for (let res = 0; res < array.length; res++) {
+                const element = array[res];
+                
+              }
+            
+              }
+          })
+       })
+     })
+
+  </script>
+</body>
+   
+</html>

@@ -1,0 +1,40 @@
+{% extends 'account/nav.html' %}
+ {% block title %}
+      صفحة الطالب
+     {% endblock  %}
+
+     {% block sign %}
+     <form class="form-inline">
+              <a class="nav-link" href="{% url 'account:logout' %}">تسجيل الخروج </a>
+        </form>
+     {% endblock  %}
+
+
+     {% block body %}
+
+    
+    
+    
+     <div style="    margin: 15px auto;
+    width: max-content;
+    font-family: auto;
+    font-size: xxx-large;" > <b>Hello, {{request.user.username}} </b> </div>
+    
+    
+
+
+   
+    {% for video in videos %}
+    <div style = "height:292px;width:317px; margin:auto; display: inline-block; margin-right: 9px;">
+       <div class="card" style="width: 100%;">
+    <iframe src="{{video.videos.URL}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <div class="card-body">
+         <h5 class="card-title">{{video.title}}</h5>
+         <p class="card-text">{{video.description}}</p>
+      </div>
+     </div>
+    </div>
+    {% endfor %}
+     
+
+     {% endblock  %}

@@ -1,0 +1,52 @@
+{% extends 'account/nav.html' %}
+ {% block title %}
+      تسجيل الدخول
+     {% endblock  %}
+
+     {% block body %}
+    <div style="display:none">
+	 {% block sign %}
+	  <form class="form-inline">
+              <a class="nav-link" href="{% url 'account:login' %}">تسجيل الدخول </a>
+        </form>
+	 {% endblock  %}
+    </div>
+
+
+   
+    <form method="post" style="    margin: 6% auto;
+    width: 361px;">
+	 {% csrf_token %}
+	  <div style="width: max-content;
+    margin: 19px auto; font-size: xx-large;" class="form-group">
+           Login
+        </div>
+    {% comment %} {{ login_form.as_p }} {% endcomment %}
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">الرقم الوطني</label>
+          <input name="the_id_number" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">كلمة السر </label>
+          <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+
+		{% for field in login_form %}
+		{% for error in field.errors %}
+			<p style="color: red;">{{error}}</p>
+		{% endfor %}
+	{% endfor %}
+	
+	{% if login_form.non_field_errors %}
+		<div style="color:red;">
+			<p>{{login_form.non_field_errors}}</p>
+		</div>
+	{% endif %} 
+        <button type="submit" class="btn btn-primary">Login</button> <a href="{% url 'admin:index' %}">  login as admin ?</a>
+    </form>
+</div>
+
+
+     {% endblock  %}

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+نجم الاسبوع 
+{% endblock title %}
+
+{% block ref %}
+<link rel="stylesheet" href="{% static 'main/css/stars.css' %}">
+
+{% endblock  %}
+
+{% block body %}
+{% include 'base/nav.html' %}
+
+<div id="container">
+  <div id="left"> 
+    <img style="height: 55px; width: 55px;" src="{% static 'main/images/medal.gif' %}" alt="medal pic">
+  </div>
+  <div id="right">
+    <img style="height: 55px; width: 55px;" src="{% static 'main/images/medal.gif' %}" alt="medal pic">
+  </div>
+  <div id="center"> 
+    <h1 id="headerStar" style="color: gold;width: max-content;"> نجوم الاسبوع  </h1>
+  </div>
+</div>
+
+
+
+  
+
+
+{% for star in stars %}
+  <div class="card" style="width: 18rem; display: inline-block;margin-top: 77px;    margin-left: 15px;">
+    <img class="card-img-top" style="width:100%; max-height: 225px;  min-height: 225px;" src="{{star.img.url}}" alt="Card image cap">
+    <div class="card-body">
+    <h5 class="card-title"  style="text-align: center; white-space: nowrap; 
+    width: 246px; 
+    overflow: hidden;
+    text-overflow: clip;">{{star.name}}</h5>
+      <p class="card-text">
+        <table class="table">
+            <tr>
+             <th style="text-align: right;">{{star.grade}}</th>
+             <th style="text-align: right;"> : الصف </th>
+            </tr>
+        </table>
+      </p>
+    </div>
+  </div>
+
+
+
+{% endfor %}
+
+{% include 'base/footer.html' %}
+
+
+{% endblock body %}
+

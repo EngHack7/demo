@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+مدارس الاريج
+{% endblock  %}
+
+
+
+{% block body %}
+
+{% include 'base/nav.html' %}
+
+    <div style="    margin: 51px auto 3px;
+    width: 100%;
+    font-family: auto;
+    font-size: xxx-large;" > <b> {{request.user.username}} مرحبا بك يا  </b> </div>
+<div>
+  <a href="{% url 'account:subject' id %}">
+<div  id="hang1" style = "height:292px;width:317px;     margin: auto 24px auto; display: inline-block; margin-right: 9px;">
+    <div class="card" style="width: 100; height:100%">
+      <img id="myImage1" src="{% static 'account/images/book.jpg' %}" class="card-img-top" alt="المواد الدراسية" />
+      <div class="card-body">
+      <h5 style="text-align: center;" class="card-title">المواد الدراسية</h5>
+   </div>
+  </div>
+ </div>
+</a>
+
+<a href="{% url 'account:exam' id %}">
+<div style = "height:292px;width:317px;     margin: auto 24px auto; display: inline-block; ">
+    <div class="card" style="width: 100; height:100%">
+      <img  id="myImage2" src="{% static 'account/images/exam.jpg' %}" class="card-img-top" alt="الاختبارات" />
+      <div class="card-body">
+      <h5 style="text-align: center;" class="card-title"> الامتحانات </h5>
+   </div>
+  </div>
+ </div>
+</div>
+</a>
+
+
+<div style="  
+ text-align: right;
+width: 100%; 
+background-repeat: no-repeat;
+background-size: 100%;
+height: 683px;
+
+margin: auto;
+background-image: url({% static 'account/images/paper.jpg' %}); 
+">
+ <div style="    width: max-content;
+ margin: auto;
+ padding: 48px;
+ font-size: 33px;text-align: right;
+ ">
+    ملاحظات المعلمين
+ </div>
+ <!-- <img src="{% static 'account/images/paper.jpg' %}" style="  
+  margin: auto; 
+ width: max-content;
+ text-align: center;
+ position: absolute; 
+"> -->
+ <ol style="width: 70%;
+ list-style-position: inside;
+ margin: auto;text-align: right;">
+  {% for note in notes %}
+  <li>{{note.note}}</li>
+  {% endfor %}
+  
+ </ol>
+
+ <script>
+ var myImg = document.getElementById('myImage2')
+   myImg = myImg.style.height  = "245px"
+   myImg = myImg.style.width = "315px"
+
+ </script>
+{% endblock  %}
