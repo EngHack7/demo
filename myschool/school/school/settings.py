@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import django_heroku
-
+import dj_database_url
 import os
 from django.contrib import messages
 
@@ -27,7 +27,7 @@ SECRET_KEY = '+ch(d)nx7n1ti#-w)1r(*6@a4p!6#va$fk-g&*%2*(d_guzop#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,6 +53,7 @@ AUTH_USER_MODEL = 'account.Account'
 # REFERRER_POLICY = 'no-referrer-when-downgrade'
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -152,3 +153,6 @@ MESSAGE_TAGS = {
 }
 #Avtivate dajngo_heroku
 django_heroku.settings(locals())
+
+# db = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db)
