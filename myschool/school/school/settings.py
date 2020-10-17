@@ -154,5 +154,5 @@ MESSAGE_TAGS = {
 #Avtivate dajngo_heroku
 django_heroku.settings(locals())
 
-# db = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db)
+db = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db)
