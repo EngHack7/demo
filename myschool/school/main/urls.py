@@ -8,9 +8,9 @@ app_name = 'main'
 
 urlpatterns = [
     path('' , Home ,  name = 'home' ),
-    path('contact' , Contact , name = 'contact'),
-    path('about' , About , name = 'about'),
-    path('stars' , Stars , name='stars')
+    path('contact/' , Contact , name = 'contact'),
+    path('about/' , About , name = 'about'),
+    path('stars/' , Stars , name='stars')
     
 ]
 

@@ -21,5 +21,5 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls , name="admin"),
     path('' , include('main.urls')),
-    path('account' , include('account.urls')),
+    path('account/' , include('account.urls')),
 ]
